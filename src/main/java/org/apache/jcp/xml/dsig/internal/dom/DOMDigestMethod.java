@@ -54,7 +54,19 @@ public abstract class DOMDigestMethod extends BaseStructure
         "http://www.w3.org/2007/05/xmldsig-more#sha3-384"; // see RFC 6931
     static final String SHA3_512 =
         "http://www.w3.org/2007/05/xmldsig-more#sha3-512"; // see RFC 6931
-
+		
+	// START GOST DIGEST METHODS
+	static final String GOSTR_3411 = 
+		"http://www.w3.org/2001/04/xmldsig-more#gostr3411";
+	static final String GOSTR_3411_URN =
+		"urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411";
+	static final String GOSTR34112012_256_URN =
+		"urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34112012-256";
+	static final String GOSTR34112012_512_URN =
+		"urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34112012-512";
+	// END GOST DIGEST METHODS
+		
+		
     private DigestMethodParameterSpec params;
 
     /**
@@ -118,6 +130,14 @@ public abstract class DOMDigestMethod extends BaseStructure
             return new SHA3_384(dmElem);
         } else if (alg.equals(SHA3_512)) {
             return new SHA3_512(dmElem);
+		} else if (alg.equals(GOSTR_3411)) {
+			return new GOST3411(dmElem);
+        } else if (alg.equals(GOSTR_3411_URN)) {
+			return new GOST3411URN(dmElem);
+        } else if (alg.equals(GOSTR34112012_256_URN)) {
+			return new GOST3411_2012_256_URN(dmElem);
+        } else if (alg.equals(GOSTR34112012_512_URN)) {
+			return new GOST3411_2012_512_URN(dmElem);
         } else {
             throw new MarshalException("unsupported DigestMethod algorithm: " +
                                        alg);
@@ -432,6 +452,82 @@ public abstract class DOMDigestMethod extends BaseStructure
         @Override
         String getMessageDigestAlgorithm() {
             return "SHA3-512";
+        }
+    }
+	
+	static final class GOST3411 extends DOMDigestMethod
+    {
+		GOST3411(AlgorithmParameterSpec params) 
+			throws InvalidAlgorithmParameterException {
+            super(params);
+		}
+		GOST3411(Element dmElem) throws MarshalException {
+            super(dmElem);
+        }
+		@Override
+        public String getAlgorithm() {
+            return GOSTR_3411;
+        }
+        @Override
+        String getMessageDigestAlgorithm() {
+            return "GOST3411";
+        }
+    }
+	
+	static final class GOST3411URN extends DOMDigestMethod
+    {
+		GOST3411URN(AlgorithmParameterSpec params) 
+			throws InvalidAlgorithmParameterException {
+            super(params);
+		}
+		GOST3411URN(Element dmElem) throws MarshalException {
+            super(dmElem);
+        }
+		@Override
+        public String getAlgorithm() {
+            return GOSTR_3411_URN;
+        }
+        @Override
+        String getMessageDigestAlgorithm() {
+            return "GOST3411";
+        }
+    }
+	
+	static final class GOST3411_2012_256_URN extends DOMDigestMethod
+    {
+		GOST3411_2012_256_URN(AlgorithmParameterSpec params) 
+			throws InvalidAlgorithmParameterException {
+            super(params);
+		}
+		GOST3411_2012_256_URN(Element dmElem) throws MarshalException {
+            super(dmElem);
+        }
+		@Override
+        public String getAlgorithm() {
+            return GOSTR34112012_256_URN;
+        }
+        @Override
+        String getMessageDigestAlgorithm() {
+            return "GOST3411_2012_256";
+        }
+    }
+	
+	static final class GOST3411_2012_512_URN extends DOMDigestMethod
+    {
+		GOST3411_2012_512_URN(AlgorithmParameterSpec params) 
+			throws InvalidAlgorithmParameterException {
+            super(params);
+		}
+		GOST3411_2012_512_URN(Element dmElem) throws MarshalException {
+            super(dmElem);
+        }
+		@Override
+        public String getAlgorithm() {
+            return GOSTR34112012_512_URN;
+        }
+        @Override
+        String getMessageDigestAlgorithm() {
+            return "GOST3411_2012_512";
         }
     }
 }

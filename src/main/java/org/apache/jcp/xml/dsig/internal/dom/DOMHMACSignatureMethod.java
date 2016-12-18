@@ -63,6 +63,12 @@ public abstract class DOMHMACSignatureMethod extends AbstractDOMSignatureMethod 
         "http://www.w3.org/2001/04/xmldsig-more#hmac-sha512";
     static final String HMAC_RIPEMD160 =
         "http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160";
+		
+	// START GOST HMAC SIGNATURE
+	static final String HMAC_GOSTR3411_URN =
+		"urn:ietf:params:xml:ns:cpxmlsec:algorithms:hmac-gostr3411";
+	static final String HMAC_GOSTR3411_URI =
+		"http://www.w3.org/2001/04/xmldsig-more#hmac-gostr3411";
 
     private Mac hmac;
     private int outputLength;
@@ -347,6 +353,50 @@ public abstract class DOMHMACSignatureMethod extends AbstractDOMSignatureMethod 
         @Override
         int getDigestLength() {
             return 160;
+        }
+    }
+	
+	static final class HMAC_GOSTR3411_URI extends DOMHMACSignatureMethod {
+        HMAC_GOSTR3411_URI(AlgorithmParameterSpec params)
+            throws InvalidAlgorithmParameterException {
+            super(params);
+        }
+        HMAC_GOSTR3411_URI(Element dmElem) throws MarshalException {
+            super(dmElem);
+        }
+        @Override
+        public String getAlgorithm() {
+            return HMAC_GOSTR3411_URI;
+        }
+        @Override
+        String getJCAAlgorithm() {
+            return "HMAC_GOSTR3411";
+        }
+        @Override
+        int getDigestLength() {
+            return 256;
+        }
+    }
+	
+	static final class HMAC_GOSTR3411_URN extends DOMHMACSignatureMethod {
+        HMAC_GOSTR3411_URN(AlgorithmParameterSpec params)
+            throws InvalidAlgorithmParameterException {
+            super(params);
+        }
+        HMAC_GOSTR3411_URN(Element dmElem) throws MarshalException {
+            super(dmElem);
+        }
+        @Override
+        public String getAlgorithm() {
+            return HMAC_GOSTR3411_URN;
+        }
+        @Override
+        String getJCAAlgorithm() {
+            return "HMAC_GOSTR3411";
+        }
+        @Override
+        int getDigestLength() {
+            return 256;
         }
     }
 }
