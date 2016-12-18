@@ -54,6 +54,8 @@ public final class XMLCipherUtil {
                 || EncryptionConstants.ALGO_ID_BLOCKCIPHER_AES192_GCM.equals(algorithm)
                 || EncryptionConstants.ALGO_ID_BLOCKCIPHER_AES256_GCM.equals(algorithm)) {
             return constructBlockCipherParametersForGCMAlgorithm(algorithm, iv, callingClass);
+        } else if (EncryptionConstants.ALGO_ID_KEYTRANSPORT_RSA15.equals(algorithm)) {
+            return null;
         } else {
             log.debug("Saw non-AES-GCM mode block cipher, returning IvParameterSpec: {}", algorithm);
             return new IvParameterSpec(iv);
