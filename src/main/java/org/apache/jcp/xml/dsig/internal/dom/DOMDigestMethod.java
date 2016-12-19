@@ -508,7 +508,7 @@ public abstract class DOMDigestMethod extends BaseStructure
         }
         @Override
         String getMessageDigestAlgorithm() {
-            return "GOST3411_2012_256";
+            return "GOST3411-2012-256";
         }
     }
 	
@@ -527,7 +527,7 @@ public abstract class DOMDigestMethod extends BaseStructure
         }
         @Override
         String getMessageDigestAlgorithm() {
-            return "GOST3411_2012_512";
+            return "GOST3411-2012-512";
         }
     }
 }

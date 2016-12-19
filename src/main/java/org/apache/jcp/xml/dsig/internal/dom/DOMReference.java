@@ -434,10 +434,19 @@ public final class DOMReference extends DOMStructure
                              XMLCryptoContext context)
         throws XMLSignatureException
     {
+		Provider 				p	= null;
+		
         if (md == null) {
             try {
-                md = MessageDigest.getInstance
-                    (((DOMDigestMethod)digestMethod).getMessageDigestAlgorithm());
+				p = (Provider)context.getProperty
+					("org.jcp.xml.dsig.internal.dom.DigestProvider");
+					
+                md = (p == null) 
+					? MessageDigest.getInstance
+						(((DOMDigestMethod)digestMethod).getMessageDigestAlgorithm())
+					: MessageDigest.getInstance
+						(((DOMDigestMethod)digestMethod).getMessageDigestAlgorithm(), p);
+						
             } catch (NoSuchAlgorithmException nsae) {
                 throw new XMLSignatureException(nsae);
             }

@@ -765,7 +765,7 @@ public abstract class DOMSignatureMethod extends AbstractDOMSignatureMethod {
         }
         @Override
         String getJCAAlgorithm() {
-            return "GOST3411withGOST3410EL";
+            return "ECGOST3410";
         }
         @Override
         Type getAlgorithmType() {
@@ -787,7 +787,7 @@ public abstract class DOMSignatureMethod extends AbstractDOMSignatureMethod {
         }
         @Override
         String getJCAAlgorithm() {
-            return "GOST3411withGOST3410EL";
+            return "ECGOST3410";
         }
         @Override
         Type getAlgorithmType() {
