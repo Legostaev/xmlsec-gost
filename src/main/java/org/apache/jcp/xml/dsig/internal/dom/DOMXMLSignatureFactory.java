@@ -247,6 +247,14 @@ public final class DOMXMLSignatureFactory extends XMLSignatureFactory {
             return new DOMDigestMethod.SHA3_384(params);
         } else if (algorithm.equals(DOMDigestMethod.SHA3_512)) {
             return new DOMDigestMethod.SHA3_512(params);
+        } else if (algorithm.equals(DOMDigestMethod.GOSTR_3411)) {
+            return new DOMDigestMethod.GOST3411(params);
+        } else if (algorithm.equals(DOMDigestMethod.GOSTR_3411_URN)) {
+            return new DOMDigestMethod.GOST3411URN(params);
+        } else if (algorithm.equals(DOMDigestMethod.GOSTR34112012_256_URN)) {
+            return new DOMDigestMethod.GOST3411_2012_256_URN(params);
+        } else if (algorithm.equals(DOMDigestMethod.GOSTR34112012_512_URN)) {
+            return new DOMDigestMethod.GOST3411_2012_512_URN(params);
         } else {
             throw new NoSuchAlgorithmException("unsupported algorithm");
         }
@@ -313,7 +321,15 @@ public final class DOMXMLSignatureFactory extends XMLSignatureFactory {
             return new DOMSignatureMethod.SHA512withECDSA(params);
         } else if (algorithm.equals(DOMSignatureMethod.ECDSA_RIPEMD160)) {
             return new DOMSignatureMethod.RIPEMD160withECDSA(params);
-        }else {
+        } else if (algorithm.equals(DOMSignatureMethod.GOSTR34102001_GOSTR3411)) {
+            return new DOMSignatureMethod.GOST3411withGOST3410(params);
+        } else if (algorithm.equals(DOMSignatureMethod.GOSTR34102001_GOSTR3411_URN)) {
+            return new DOMSignatureMethod.GOST3411withGOST3410URN(params);
+        } else if (algorithm.equals(DOMSignatureMethod.GOSTR34102012_GOSTR34112012_256_URN)) {
+            return new DOMSignatureMethod.GOST3411_2012_256withGOST3410_2012_256_URN(params);
+        } else if (algorithm.equals(DOMSignatureMethod.GOSTR34102012_GOSTR34112012_512_URN)) {
+            return new DOMSignatureMethod.GOST3411_2012_512withGOST3410_2012_512_URN(params);
+        } else {
             throw new NoSuchAlgorithmException("unsupported algorithm");
         }
     }
